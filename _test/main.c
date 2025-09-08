@@ -1,23 +1,20 @@
 #include <stdio.h>
-#include <errno.h>
 #include <string.h>
-#include <stddef.h>
-#include <unistd.h>
 
-int main(void) {
-    char *buf = NULL;
-    size_t n = 0;
-    ssize_t nread = 0;
+int main()
+{
+    // create a buffer of 50 characters read one line of input from stdin
 
-    if ((nread = getline(&buf, &n, stdin)) != -1)
-    {
-        printf("Read %zd characters: %s", nread, buf);
-    }
-    else
-    {
-        perror('getline');
+    char buf[50] = {0};
+
+    if(!fgets(buf, sizeof(buf), stdin)) {
+        perror("fgets");
+        return 1;
     }
 
+    printf("test: %zu", strlen(buf));
+    printf("Result: %s\n", buf);
 
-
+    
+    return 0;
 }
