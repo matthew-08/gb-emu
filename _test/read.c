@@ -1,41 +1,14 @@
-#include <stdio.h>
-#include <string.h>
 
 #include <stdio.h>
-#include <sys/stat.h>
 
-long get_file_size(const char *filename) {
-    struct stat st;
-    if (stat(filename, &st) == 0)
-        return st.st_size;
-    return -1;
-}
+int main () {
+    freopen("operations.txt", "r+", stdin);
 
-int main()
-{
-    FILE *f = fopen("./input.txt", "r");
-    long fs = get_file_size("./input.txt");
+    freopen("result.txt", "w", stdout);
 
-    printf("RESULT: [%ld]\n", fs);
+    int a;
+    int b;
+    scanf("%d %d", &a, &b);
 
-    int c = 0;
-    
-    char buf[4096];
-    size_t nread;
-    
-    char *p = buf;
-    while((nread = fread(buf, 1, 4096, f)) > 0)
-    {
-        while (p = memchr(p, 'a', nread))
-        {
-            c++;
-            p++;
-        }
-    }
-
-
-    printf("RESULT: [%d]\n", c);
-    fclose(f);
-    
-    return 0;
+    printf("%d", a+b);
 }

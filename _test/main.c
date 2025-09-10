@@ -1,8 +1,9 @@
 #include <stdio.h>
 #include <string.h>
-
+#include <stdlib.h>
 #include <stdio.h>
 #include <sys/stat.h>
+#include <sys/types.h>
 
 long get_file_size(const char *filename) {
     struct stat st;
@@ -21,36 +22,36 @@ int main()
    // at the end, print each string to stdout.
 
 
-   FILE *fp = fopen("./input.txt", "r");
+   FILE *fp = fopen("./out.txt", "rb"); 
+   if (!fp) { perror("fopen"); return 1; }
+
    fseek(fp, 0, SEEK_END);
    long size = ftell(fp);
    
-   long chunk_size = 4000;
-   long offset = 0;
+   const long CHUNK_SIZE = 4096;
+   
+   unsigned char *buffer = malloc(CHUNK_SIZE);
+   if (!buffer) { perror("malloc"); fclose(fp); return 1;};
 
 
-   long pos = size;
-   printf("%ld", ftell(fp));
-
-   char buffer[4000] = {0};
 
 
-   int right = size;
-   int left = 0;
-   while (right > left)
+   long right = size;
+
+   while (right > 0)
    {
-    // right = size
-    // left = size - chunk_size OR size - size
-    int left = (chunk_size > size) ? 0 : size - chunk_size; 
-    size = (right - left);
+
+    long left = ((right - CHUNK_SIZE) < 0) ? 0 : (right - CHUNK_SIZE);
+    size_t span = (right - left);
+
 
     fseek(fp, left, SEEK_SET);
-    fread(buffer, 1, size, fp);
-    fwrite(buffer, 1, size, stdout);
-
+    size_t got = fread(buffer, 1, span, fp);
+    fwrite(buffer, 1, got, stdout);
     right = left;
 
    }
+
 
 
    
