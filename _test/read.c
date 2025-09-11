@@ -27,19 +27,32 @@ double area(struct TaggedShape s) {
  
 int main () {
 
-    // Utilizing fread, open a file called ./input.text, and read from it in 4096 chunks, 
-    // using fwrite to write the output into stdout.
-    FILE *fp = fopen("./input.txt", "r");
+// Utilzing fread and memchr, create a program which opens 
+// ./input.txt and reads from it into a buffer in 4096 byte chunks.  
+// From there, search the text for occurances of 'a' and print a count of them in the format:
+// RESULT: [%d]\n
+
+    FILE *fp = fopen("input-2.txt", "r");
 
     const int CHUNK_SIZE = 4096;
-    char *buff = malloc(CHUNK_SIZE);
 
-    size_t nread;
+    char buf[CHUNK_SIZE];
 
-    while ((nread = fread(buff, 1, CHUNK_SIZE, fp)) > 0) {
-        fwrite(buff, 1, nread, stdout);
+    int c;
+    ssize_t nread;
+    char *p = buf;
+
+    printf("test\n");
+    while((nread = fread(buf, 1, CHUNK_SIZE, fp)) > 0)
+    {
+        printf("test\n");
+        while (p = memchr(p, 'a', nread) && !((p - buf) >= CHUNK_SIZE)) {
+            c++;
+            p++;
+        }
     }
 
+    printf("RESULT FOUND >>[%d]<< \n", c);
+    fclose(fp);
     return 0;
-
 }
