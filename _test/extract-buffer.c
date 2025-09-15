@@ -1,20 +1,11 @@
 #include <stdio.h>
 #include <sys/io.h>
 #include <string.h>
-
-
+#include <stdlib.h>
 
 
 int main() {
 
-    char name[50];
-    double height;
-    int age;
-
-    if ((scanf("%s %lf %d", name, &height, &age)) == 3) {
-        printf("NAME: %s, height: %lf, age: %d", name, height, age);
-    }
- 
-    return 0;
-
+    char *p = malloc(10);
+    p[10] = '\0';   // ❌ should be p[9]
 }
