@@ -2,12 +2,18 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#define CHUNK_SIZE 4096
+
 int main(void) {
 
-     __attribute__((aligned(64))) char buf[80];   // extra space so we can cross boundary
-    for (int i = 0; i < 80; i++) buf[i] = i;
+    FILE *f = fopen("./input.txt", "r");
+    char buf[CHUNK_SIZE];
 
-    __m128i v = _mm_loadu_si128((__m128i*)&buf[60]); // crosses the 64-byte line
-    printf("first byte = %d\n", ((char*)&v)[0]);
+    size_t nread;
+    while ((nread = fread(buf, 1, CHUNK_SIZE, f)) > 0) {
+        fwrite(f, 1, nread, stdout);
+    }
+
     return 0;
+
 }

@@ -2,22 +2,18 @@
 #include <string.h>
 
 int main(void) {
-    const char *input = "  one  two   three ";
-    const char *delims = " \t\n";
-    const char *p = input;
+   // take in user input from stdin, print everything after the word skip
 
-    while (*p) {
-        // Skip leading delimiters (spaces, tabs, newlines)
-        p += strspn(p, delims);
-        if (*p == '\0') break;
+    const char *str = "skiphello world";
+    const char *p = strstr(str, "skip");   // find "skip" inside str
 
-        // Find the length of this word
-        size_t len = strcspn(p, delims);
-
-        // Print the token
-        printf("Token: %.*s\n", (int)len, p);
-
-        // Advance to next possible token
-        p += len;
+    if (p) {
+        p += 4; // move past "skip"
+        printf("%s\n", p);  // print everything after
+    } else {
+        printf("No 'skip' found\n");
     }
+
+    return 0;
+
 }
