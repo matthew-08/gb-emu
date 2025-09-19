@@ -4,18 +4,23 @@
 
 struct Foo {
     Foo(int x) {
-        std::cout << "Constructor";
+        std::cout << "Hello constructor";
     }
     ~Foo() {
-        std::cout << "Destructor222";
+        std::cout << "Hello destructor";
     }
 };
 
 int main() {
-  void* buf = std::malloc(sizeof(Foo));
-  
-  Foo* f = new (buf) Foo(10);
 
-  f->~Foo();
-  std:free(buf);
+    void* buf = operator new(sizeof(Foo));
+
+    Foo* f = new (buf) Foo(42);
+
+    f->~Foo;
+    std::free(buf);
+
+
+
+
 }

@@ -1,9 +1,7 @@
-
 #include <stdio.h>
 
-int main() {
+int main(void) {
+    char **strs = {"hello", "test"};
 
-    const int CHUNK_SIZE = 4096;
-    int test = 1024;
-    printf("%d", (test - CHUNK_SIZE));
+    printf("%s", strs);
 }
