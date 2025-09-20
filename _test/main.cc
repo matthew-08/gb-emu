@@ -3,23 +3,24 @@
 #include <iostream>
 
 struct Foo {
+
     Foo(int x) {
-        std::cout << "Hello constructor";
+        std::cout << "Constructor ran";
     }
     ~Foo() {
-        std::cout << "Hello destructor";
+        std::cout << "Destructor ran";
     }
 };
 
 int main() {
 
+
     void* buf = operator new(sizeof(Foo));
 
-    Foo* f = new (buf) Foo(42);
+    Foo* f = new (buf) Foo(10);
+    f->~Foo();
 
-    f->~Foo;
     std::free(buf);
-
 
 
 

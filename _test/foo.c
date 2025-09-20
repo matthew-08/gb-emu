@@ -1,45 +1,31 @@
-#include <immintrin.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
-#define CHUNK_SIZE 4096
 
-char *read_stdin(void) {
+char *reverse(char *s) {
+    size_t len = strlen(s);
 
-    size_t cap = 1024;
-    size_t len = 0;
+    size_t i, j;
 
-    char *buf = malloc(1024);
-
-    if(!buf) return 0;
-
-    char ch;
-    while ((ch = getchar()) != EOF) {
-        if (len + 1 > cap) {
-           cap *= 2;
-           char *tmp = realloc(buf, cap);
-           if(!tmp) {
-            free(buf);
-            return NULL;
-           }
-           buf = tmp; 
-        }
-        buf[len++] = ch;
+    char tmp;
+    for (i = 0, j = (len ? len - 1 : 0); i < j; i++, j--) {
+        tmp = s[j];
+        s[j] = s[i];
+        s[i] = tmp;
     }
 
-    buf[len] = '\0';
-
-    return buf;
 }
-
 
 int main () {
 
-    char *strs[] = {"hello", "test", "amazing"};
-    
-    for (int i = 0; i < (sizeof(strs) / sizeof(*strs)); i++) {
-        printf("INDEX: %d\nPointer: %p\nString: %s\n", i, strs[i], strs[i]);
+    char *contents = read_stdin();
+
+    if (contents) {
+        printf("%s", read_stdin());
+        free(contents);
     }
+
 }
+// *(*strs)
 
