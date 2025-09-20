@@ -1,1 +1,6 @@
-10
+options for reading from files:
+
+fgetc, getc 
+fgets, gets (outdated)
+fread - block based
+fscanf 

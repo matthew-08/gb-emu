@@ -6,6 +6,6 @@
 
 int main() {
 
-    char *p = malloc(10);
+    char *  p = malloc(10);
     p[10] = '\0';   // ❌ should be p[9]
 }

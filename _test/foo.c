@@ -1,19 +1,45 @@
 #include <immintrin.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #define CHUNK_SIZE 4096
 
-int main(void) {
+char *read_stdin(void) {
 
-    FILE *f = fopen("./input.txt", "r");
-    char buf[CHUNK_SIZE];
+    size_t cap = 1024;
+    size_t len = 0;
 
-    size_t nread;
-    while ((nread = fread(buf, 1, CHUNK_SIZE, f)) > 0) {
-        fwrite(f, 1, nread, stdout);
+    char *buf = malloc(1024);
+
+    if(!buf) return 0;
+
+    char ch;
+    while ((ch = getchar()) != EOF) {
+        if (len + 1 > cap) {
+           cap *= 2;
+           char *tmp = realloc(buf, cap);
+           if(!tmp) {
+            free(buf);
+            return NULL;
+           }
+           buf = tmp; 
+        }
+        buf[len++] = ch;
     }
 
-    return 0;
+    buf[len] = '\0';
 
+    return buf;
 }
+
+
+int main () {
+
+    char *strs[] = {"hello", "test", "amazing"};
+    
+    for (int i = 0; i < (sizeof(strs) / sizeof(*strs)); i++) {
+        printf("INDEX: %d\nPointer: %p\nString: %s\n", i, strs[i], strs[i]);
+    }
+}
+
