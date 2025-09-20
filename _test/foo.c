@@ -3,29 +3,16 @@
 #include <string.h>
 
 
-char *reverse(char *s) {
-    size_t len = strlen(s);
 
-    size_t i, j;
+int main (int argc, char *argv[]) {
 
-    char tmp;
-    for (i = 0, j = (len ? len - 1 : 0); i < j; i++, j--) {
-        tmp = s[j];
-        s[j] = s[i];
-        s[i] = tmp;
-    }
+    freopen("./o-input.txt", "r", stdin);
+    freopen("./o-output.txt", "w", stdout);
 
-}
+    int a,b;
+    scanf("%d %d", &a, &b);
 
-int main () {
-
-    char *contents = read_stdin();
-
-    if (contents) {
-        printf("%s", read_stdin());
-        free(contents);
-    }
-
+    printf("%d", a + b);
 }
 // *(*strs)
 
