@@ -1,31 +1,19 @@
 #include <stdio.h>
+#include <sys/stat.h>
 #include <stdlib.h>
-#include <time.h>
 
+void print_binary(int num) {
+    int whole = num / 2;
+    int r = num % 2;
 
-void print_nums (int n, int *nums) {
-    
-    for (int i = 0; i < n; i++) {
-        printf("%d\n", nums[i]);
+    if (whole != 0) {
+        print_binary(whole);
     }
 
+    printf("%d", r);
 }
 
-int main (int argc, char *argv[]) {
-
-    srand(time(NULL));
-
-    int *buf = malloc(1024 * sizeof(*buf));
-
-    if (!buf) {
-        perror("malloc");
-        return 1;
-    }
-
-    for (int i = 0; i < 1024; i++) {
-        buf[i] = rand();
-    }
-
-    print_nums(1024, buf);
+int main () {
+    print_binary(22);
 
 }

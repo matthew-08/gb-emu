@@ -5,14 +5,13 @@
 
 
 int main (int argc, char *argv[]) {
+    char *strings[] = {"test", "abc", "123"};
 
-    freopen("./o-input.txt", "r", stdin);
-    freopen("./o-output.txt", "w", stdout);
+    printf("%s", *(strings + 1));
+    
 
-    int a,b;
-    scanf("%d %d", &a, &b);
-
-    printf("%d", a + b);
+    return 0;
+    
 }
 // *(*strs)
 
