@@ -8,6 +8,7 @@ void print_nums (int n, int *nums) {
     for (int i = 0; i < n; i++) {
         printf("%d\n", nums[i]);
     }
+
 }
 
 int main (int argc, char *argv[]) {
